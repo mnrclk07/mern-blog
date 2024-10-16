@@ -54,7 +54,7 @@ export default function Header() {
           color="gray"
           pill
           onClick={() => dispatch(toogleTheme())}>
-          {theme === "light" ? <FaSun /> : <FaMoon />}
+          {theme === "light" ? <FaMoon /> : <FaSun />}
         </Button>
         {currentUser ? (
           <Dropdown
