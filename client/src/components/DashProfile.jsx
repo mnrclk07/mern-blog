@@ -165,7 +165,7 @@ export default function DashProfile() {
 
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
-      <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
+      <h1 className="my-7 text-center font-semibold text-3xl">Profil</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="file"
@@ -228,7 +228,7 @@ export default function DashProfile() {
         <TextInput
           type="password"
           id="password"
-          placeholder="password"
+          placeholder="*******"
           onChange={handleChange}
         />
         <Button
@@ -236,7 +236,7 @@ export default function DashProfile() {
           gradientDuoTone="purpleToBlue"
           outline
           disabled={loading || imageFileUploading}>
-          {loading ? "Loading..." : "Update"}
+          {loading ? "Yükleniyor..." : "Güncelle"}
         </Button>
         {currentUser.isAdmin && (
           <Link to={"/create-post"}>
@@ -244,17 +244,17 @@ export default function DashProfile() {
               type="button"
               gradientDuoTone="purpleToPink"
               className="w-full">
-              Create a post
+              Gönderi oluştur
             </Button>
           </Link>
         )}
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>
-          Delete Account
+          Hesabı sil
         </span>
         <span className="cursor-pointer" onClick={() => handleSignout()}>
-          Sign Out
+          Çıkış yap
         </span>
       </div>
       {updateUserSuccess && (

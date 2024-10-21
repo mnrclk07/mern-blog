@@ -21,6 +21,31 @@ export default function CreatePost() {
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
 
+  const toolbarOptions = [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
+    ["link", "image", "video", "formula"],
+
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["clean"], // remove formatting button
+  ];
+
+  const module = {
+    toolbar: toolbarOptions,
+  };
+
   const handleUploadImage = async () => {
     try {
       if (!file) {
@@ -85,12 +110,14 @@ export default function CreatePost() {
   };
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
-      <h1 className="text-center text-3xl my-7 font-semibold">Create a post</h1>
+      <h1 className="text-center text-3xl my-7 font-semibold">
+        Gönderi oluştur
+      </h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <TextInput
             type="text"
-            placeholder="Title"
+            placeholder="Başlık"
             required
             id="title"
             className="flex-1"
@@ -102,7 +129,7 @@ export default function CreatePost() {
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
             }>
-            <option value="uncategorized">Select a category</option>
+            <option value="Seç">Kategori seç</option>
             <option value="javascript">JavaScript</option>
             <option value="reactjs">React.js</option>
             <option value="nextjs">Next.js</option>
@@ -129,7 +156,7 @@ export default function CreatePost() {
                 />
               </div>
             ) : (
-              "Upload Image"
+              "Resimi Güncelle"
             )}
           </Button>
         </div>
@@ -142,14 +169,15 @@ export default function CreatePost() {
           />
         )}
         <ReactQuill
+          modules={module}
           theme="snow"
-          placeholder="Write something..."
+          placeholder="Birşeyler yaz..."
           className="h-72 mb-12"
           required
           onChange={(value) => setFormData({ ...formData, content: value })}
         />
         <Button type="submit" gradientDuoTone="purpleToPink">
-          Publish
+          Paylaş
         </Button>
         {publishError && (
           <Alert className="mt-5" color="failure">

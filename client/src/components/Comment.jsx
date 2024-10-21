@@ -78,7 +78,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                 size="sm"
                 gradientDuoTone="purpleToBlue"
                 onClick={handleSave}>
-                Save
+                Kaydet
               </Button>
               <Button
                 type="button"
@@ -86,7 +86,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                 gradientDuoTone="purpleToBlue"
                 outline
                 onClick={() => setIsEditing(false)}>
-                Cancel
+                İptal
               </Button>
             </div>
           </>
@@ -108,7 +108,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                 {comment.numberOfLikes > 0 &&
                   comment.numberOfLikes +
                     " " +
-                    (comment.numberOfLikes === 1 ? "like" : "likes")}
+                    (comment.numberOfLikes >= 1 ? "Beğeni" : "")}
               </p>
               {currentUser &&
                 (currentUser._id === comment.userId || currentUser.isAdmin) && (
@@ -117,13 +117,13 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                       type="button"
                       onClick={handleEdit}
                       className="text-gray-400 hover:text-blue-500">
-                      Edit
+                      Düzenle
                     </button>
                     <button
                       type="button"
                       onClick={() => onDelete(comment._id)}
                       className="text-gray-400 hover:text-red-500">
-                      Delete
+                      Sil
                     </button>
                   </>
                 )}

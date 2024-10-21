@@ -50,7 +50,7 @@ export default function DashSidebar() {
                 active={tab === "dash" || !tab}
                 icon={HiChartPie}
                 as="div">
-                Dashboard
+                Gösterge Paneli
               </Sidebar.Item>
             </Link>
           )}
@@ -61,7 +61,7 @@ export default function DashSidebar() {
               label={currentUser.isAdmin ? "Admin" : "User"}
               labelColor="dark"
               as="div">
-              Profile
+              Profil
             </Sidebar.Item>
           </Link>
           {currentUser.isAdmin && (
@@ -70,7 +70,7 @@ export default function DashSidebar() {
                 active={tab === "posts"}
                 icon={HiDocumentText}
                 as="div">
-                Posts
+                Gönderiler
               </Sidebar.Item>
             </Link>
           )}
@@ -80,7 +80,7 @@ export default function DashSidebar() {
                 active={tab === "users"}
                 icon={HiOutlineUserGroup}
                 as="div">
-                Users
+                Kullanıcılar
               </Sidebar.Item>
             </Link>
           )}
@@ -90,7 +90,7 @@ export default function DashSidebar() {
                 active={tab === "comments"}
                 icon={HiAnnotation}
                 as="div">
-                Comments
+                Yorumlar
               </Sidebar.Item>
             </Link>
           )}
@@ -98,7 +98,7 @@ export default function DashSidebar() {
             icon={HiArrowSmRight}
             className="cursor-pointer"
             onClick={handleSignout}>
-            Sign Out
+            Çıkış yap
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>

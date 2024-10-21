@@ -6,26 +6,28 @@ function About() {
       <div className="max-w-2xl mx-auto p-3 text-center">
         <div>
           <h1 className="text-3xl font font-semibold text-center my-7">
-            About Sahand' Blog
+            Blog Hakkında
           </h1>
           <div className="text-md text-gray-500 flex flex-col gap-6">
             <p>
-              Welcome to Sahand's Blog! This blog was created by Sahand Ghavidel
-              as a personal project to share his thoughts and ideas with the
-              world. Sahand is a passionate developer who loves to write about
-              technology, coding, and everything in between.
+              Hoş Geldiniz! Bu blog, Mehmet Çelik tarafından düşüncelerini ve
+              fikirlerini dünyayla paylaşmak için kişisel bir proje olarak
+              oluşturuldu. Mehmet, teknoloji, kodlama ve bunların arasındaki her
+              şey hakkında yazmayı seven tutkulu bir geliştiricidir.
             </p>
             <p>
-              On this blog, you'll find weekly articles and tutorials on topics
-              such as web development, software engineering, and programming
-              languages. Sahand is always learning and exploring new
-              technologies, so be sure to check back often for new content!
+              Bu blogda web geliştirme, yazılım mühendisliği ve programlama
+              dilleri gibi konularda haftalık makaleler ve eğitimler
+              bulacaksınız. Mehmet her zaman yeni teknolojiler öğreniyor ve
+              keşfediyor, bu yüzden yeni içerikler için sık sık geri gelmeyi
+              unutmayın!
             </p>
             <p>
-              We encourage you to leave comments on our posts and engage with
-              other readers. You can like other people's comments and reply to
-              them as well. We believe that a community of learners can help
-              each other grow and improve.
+              Gönderilerimize yorum bırakmanızı ve diğer okuyucularla etkileşime
+              girmenizi teşvik ediyoruz. Başkalarının yorumlarını beğenebilir ve
+              onlara yanıt verebilirsiniz. Öğrenenlerden oluşan bir topluluğun
+              birbirlerinin büyümesine ve gelişmesine yardımcı olabileceğine
+              inanıyoruz.
             </p>
           </div>
         </div>

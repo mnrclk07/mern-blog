@@ -40,7 +40,7 @@ export default function OAuth() {
       outline
       onClick={handleGoogleClick}>
       <AiFillGoogleCircle className="w-6 h-6 mr-2" />
-      Continue with Google
+      Google ile giriş yap
     </Button>
   );
 }

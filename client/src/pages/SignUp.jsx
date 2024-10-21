@@ -16,7 +16,8 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("Please fill out all fields.");
+      alert("Lütfen tüm alanları doldurun.");
+      return setErrorMessage("Lütfen tüm alanları doldurun.");
     }
     try {
       setLoading(true);
@@ -45,30 +46,30 @@ function SignUp() {
         {/* left */}
         <div className="flex-1">
           <Link to="/" className="font-bold dark:text-white text-4xl">
-            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-              Mehmet's
+            <span className="px-5 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-se-lg rounded-es-lg text-white">
+              MERN
             </span>
             Blog
           </Link>
           <p className="text-sm mt-5">
-            This is a demo project. You can sign up with your email and password
-            or with Google.
+            Bu bir demo projesidir. E-postanız ve şifrenizle kaydolabilirsiniz
+            veya Google ile..
           </p>
         </div>
         {/* right */}
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
-              <Label value="Your username" />
+              <Label value="Kullanıcı adı" />
               <TextInput
                 type="text"
-                placeholder="Username"
+                placeholder="Kullanıcı adı"
                 id="username"
                 onChange={handleChange}
               />
             </div>
             <div>
-              <Label value="Your email" />
+              <Label value="Email" />
               <TextInput
                 type="email"
                 placeholder="name@company.com"
@@ -77,10 +78,10 @@ function SignUp() {
               />
             </div>
             <div>
-              <Label value="Your password" />
+              <Label value="Şifre" />
               <TextInput
                 type="password"
-                placeholder="Password"
+                placeholder="*******"
                 id="password"
                 onChange={handleChange}
               />
@@ -91,17 +92,18 @@ function SignUp() {
               disabled={loading}>
               {loading ? (
                 <>
-                  <Spinner size="sm" /> <span className="pl-3">Loading...</span>
+                  <Spinner size="sm" />{" "}
+                  <span className="pl-3">Yükleniyor...</span>
                 </>
               ) : (
-                "Sign Up"
+                "Kayıt ol"
               )}
             </Button>
             <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <Link to="/sign-in" className="text-blue-500">
-              Sign In
+              Giriş yap
             </Link>
           </div>
           {errorMessage && (

@@ -76,13 +76,13 @@ export default function DashPosts() {
         <>
           <Table hoverable className="shadow-md">
             <Table.Head>
-              <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+              <Table.HeadCell>Güncelleme Tarihi</Table.HeadCell>
+              <Table.HeadCell>Gönderi Resimi</Table.HeadCell>
+              <Table.HeadCell>Gönderi Başlığı</Table.HeadCell>
+              <Table.HeadCell>Kategori</Table.HeadCell>
+              <Table.HeadCell>Sil</Table.HeadCell>
               <Table.HeadCell>
-                <span>Edit</span>
+                <span>Düzenle</span>
               </Table.HeadCell>
             </Table.Head>
             {userPosts.map((post) => (
@@ -115,14 +115,14 @@ export default function DashPosts() {
                         setPostIdToDelete(post._id);
                       }}
                       className="font-medium text-red-500 hover:underline cursor-pointer">
-                      Delete
+                      Sil
                     </span>
                   </Table.Cell>
                   <Table.Cell>
                     <Link
                       className="text-teal-500 hover:underline"
                       to={`/update-post/${post._id}`}>
-                      <span>Edit</span>
+                      <span>Düzenle</span>
                     </Link>
                   </Table.Cell>
                 </Table.Row>
@@ -133,12 +133,12 @@ export default function DashPosts() {
             <button
               onClick={handleShowMore}
               className="w-full text-teal-500 self-center text-sm py-7">
-              Show more
+              Daha fazla
             </button>
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <p>Henüz gönderiniz yok!</p>
       )}
       <Modal
         show={showModal}
@@ -150,14 +150,14 @@ export default function DashPosts() {
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this post?
+              Bu gönderiyi silmek istediğinizden emin misiniz?
             </h3>
             <div className="flex justify-center gap-4">
               <Button color="failure" onClick={handleDeletePost}>
-                Yes, I'm sure
+                Evet, Eminim
               </Button>
               <Button color="gray" onClick={() => setShowModal(false)}>
-                No, cancel
+                Hayır, Emin değilim
               </Button>
             </div>
           </div>
