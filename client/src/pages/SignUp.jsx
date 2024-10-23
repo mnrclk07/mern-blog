@@ -4,42 +4,72 @@ import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 function SignUp() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Form verilerini kaydetme ve hata mesajını temizleme
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+    setErrorMessage(null); // Veri girildikçe hata mesajı temizlenir
   };
 
+  // Formu gönderme ve sunucuya istek yapma
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
-      alert("Lütfen tüm alanları doldurun.");
+    const { username, email, password } = formData;
+
+    // Form doğrulama
+    if (!username || !email || !password) {
       return setErrorMessage("Lütfen tüm alanları doldurun.");
     }
+
+    // E-posta formatı doğrulama
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return setErrorMessage("Geçerli bir e-posta adresi giriniz.");
+    }
+
+    // Şifre doğrulama: minimum 6 karakter
+    if (password.length < 6) {
+      return setErrorMessage("Şifreniz en az 6 karakter olmalıdır.");
+    }
+
     try {
       setLoading(true);
       setErrorMessage(null);
+
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
       const data = await res.json();
-      if (data.success === false) {
-        return setErrorMessage(data.message);
+      if (!res.ok) {
+        throw new Error(data.message || "Kayıt işlemi başarısız.");
       }
-      setLoading(false);
-      if (res.ok) {
-        navigate("sign-in");
-      }
+
+      // Kayıt başarılıysa formu temizleyip yönlendir
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+
+      navigate("/sign-in");
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error.message || "Bir hata oluştu.");
+    } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="min-h-screen mt-20">
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">

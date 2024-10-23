@@ -6,6 +6,7 @@ import { errorHandler } from "../utils/error.js";
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
+  // Alanların eksik olup olmadığını kontrol et
   if (
     !username ||
     !email ||
@@ -14,9 +15,10 @@ export const signup = async (req, res, next) => {
     email === "" ||
     password === ""
   ) {
-    next(errorHandler(400, "All fields are required"));
+    return next(errorHandler(400, "Tüm alanlar doldurulmalıdır."));
   }
 
+  // Şifreyi hashle
   const hashedPassword = bcryptjs.hashSync(password, 10);
 
   const newUser = new User({
@@ -26,9 +28,20 @@ export const signup = async (req, res, next) => {
   });
 
   try {
+    // Yeni kullanıcıyı kaydet
     await newUser.save();
-    res.json("Sign up successful");
+    res.json("Kayıt başarılı!");
   } catch (error) {
+    // Eğer kullanıcı adı veya e-posta çakışması varsa
+    if (error.code === 11000) {
+      const duplicateField = Object.keys(error.keyValue)[0]; // Hangi alanın çakıştığını öğren (username veya email)
+      if (duplicateField === "username") {
+        return next(errorHandler(400, `Bu kullanıcı adı zaten kullanılıyor.`));
+      }
+      if (duplicateField === "email") {
+        return next(errorHandler(400, `Bu email  zaten kullanılıyor.`));
+      }
+    }
     next(error);
   }
 };
