@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { BiHide, BiShow } from "react-icons/bi";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ function SignUp() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -70,8 +73,17 @@ function SignUp() {
     }
   };
 
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000); // 3 saniye sonra hata mesajı kaybolur
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage, setErrorMessage]);
+
   return (
-    <div className="min-h-screen mt-20">
+    <div className="min-h-screen mt-20 select-none">
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
         {/* left */}
         <div className="flex-1">
@@ -102,19 +114,24 @@ function SignUp() {
               <Label value="Email" />
               <TextInput
                 type="email"
-                placeholder="name@company.com"
+                placeholder="isim@sirket.com"
                 id="email"
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <Label value="Şifre" />
+            <div className="relative">
               <TextInput
-                type="password"
-                placeholder="*******"
+                type={showPassword ? "text" : "password"}
+                placeholder="********"
                 id="password"
+                value={formData.password}
                 onChange={handleChange}
               />
+              <span
+                className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <BiHide /> : <BiShow />}
+              </span>
             </div>
             <Button
               gradientDuoTone="purpleToPink"

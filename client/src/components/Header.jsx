@@ -49,7 +49,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className="border-b-2">
+    <Navbar className="border-b-2 select-none">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
@@ -78,7 +78,7 @@ export default function Header() {
             borderRadius: "0 50px 50px 0",
           }}
           aria-label="Search button">
-          <AiOutlineSearch className="size-6" />
+          <AiOutlineSearch className="size-6 " color="white" />
         </Button>
       </form>
 
@@ -134,7 +134,7 @@ export default function Header() {
           className="sm:hidden">
           <Link to="/search?searchTerm=">Arama</Link>
         </Navbar.Link>
-        <div className=" sm:hidden w-20 ml-1 mt-2 focus:ring-0  focus:outline-none border border-solid  rounded-2xl border-slate-800  dark:border-slate-100">
+        <div className=" sm:hidden w-20 ml-1 mt-2 focus:ring-0  focus:outline-none border border-solid  rounded-2xl border-slate-800  dark:border-gray-500">
           <Link color="gray" onClick={() => dispatch(toogleTheme())}>
             {theme === "light" ? (
               <FaMoon

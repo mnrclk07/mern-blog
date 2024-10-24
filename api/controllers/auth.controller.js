@@ -49,34 +49,43 @@ export const signup = async (req, res, next) => {
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
-  if (!email || !password || email === "" || password === "") {
-    next(errorHandler(400, "All fields are required"));
+  // Alan doğrulaması
+  if (!email || !password) {
+    return next(errorHandler(400, "Tüm alanlar doldurulmalıdır."));
   }
 
   try {
+    // Kullanıcıyı bul
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      return next(errorHandler(404, "User not found"));
+      return next(errorHandler(404, "Kullanıcı bulunamadı."));
     }
 
+    // Şifre doğrulaması
     const validPassword = bcryptjs.compareSync(password, validUser.password);
-
     if (!validPassword) {
-      return next(errorHandler(400, "Invalid password"));
+      return next(errorHandler(400, "Geçersiz şifre."));
     }
+
+    // JWT token oluştur
     const token = jwt.sign(
       { id: validUser._id, isAdmin: validUser.isAdmin },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" } // Token'in 1 saatlik ömrü var
     );
 
-    const { password: pass, ...rest } = validUser._doc;
+    // Şifreyi cevaptan çıkartarak döndür
+    const { password: _, ...userWithoutPassword } = validUser._doc;
 
+    // Çerezde güvenlik ayarları ekle
     res
       .status(200)
-      .cookie("accsess_token", token, {
+      .cookie("access_token", token, {
         httpOnly: true,
+        /* secure: process.env.NODE_ENV === "production", // ! Yalnızca HTTPS üzerinden erişim
+        sameSite: "strict", // ! CSRF koruması için çerez kısıtlaması */
       })
-      .json(rest);
+      .json(userWithoutPassword); // Şifresiz kullanıcı bilgisi dön
   } catch (error) {
     next(error);
   }

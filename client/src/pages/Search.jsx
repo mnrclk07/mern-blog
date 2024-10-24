@@ -90,7 +90,7 @@ export default function Search() {
     }
   };
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row select-none">
       <div className="p-7 border-b md:border-r md:min-h-screen border-gray-500">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex   items-center gap-2">
@@ -98,7 +98,7 @@ export default function Search() {
               Arama Terimi:
             </label>
             <TextInput
-              placeholder="Arama..."
+              placeholder="Ara"
               id="searchTerm"
               type="text"
               value={sidebarData.searchTerm}
@@ -121,7 +121,7 @@ export default function Search() {
               onChange={handleChange}
               value={sidebarData.category || ""}
               id="category">
-              <option value="uncategorized">SEÇ</option>
+              <option value="uncategorized">Seç</option>
               <option value="reactjs">React.js</option>
               <option value="nextjs">Next.js</option>
               <option value="javascript">JavaScript</option>
